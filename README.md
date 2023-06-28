@@ -1,5 +1,5 @@
 # 介绍
-deepstream的升级版，简称**maxDeepstream**，在deepstream-6.1及以上版本中，基于其sample_apps中deepstream-app源码，提出了两点修改:  
+deepstream的升级版，简称**maxDeepstream**，在deepstream-6.1及以上版本中，基于其sample_apps中deepstream-app源码，提出了几点修改:  
 - 1、在deepstream的gst-plugins基础上，修改并支持任何tensorRT的模型引擎的推理;  
 - 2、将deepstream-nvdsanalytics-test的代码整理融合进deepstream-app中进行目标检测以及跟踪后的meta-data数据分析。
 - 3、添加了http通信协议，将预警数据以json数据包的形式通过http_post发送
@@ -43,9 +43,10 @@ deepstream的升级版，简称**maxDeepstream**，在deepstream-6.1及以上版
 - e、在确保以上代码更新无误后，先在cuda_c下进行make, 再在tensorrt_lib下make, 最后在$PATH/gst-plugins/gst-dsexample/下 make clean,make,sudo make install即可
   
 # 测试
-目前maxDeepstream除了支持deepstream本身的一些peoplenet, trafficcamnet外，也支持自定义的级联网络逻辑推理，在完成以上代码更新以及编译后，即可进行以下  demo的复现  
+目前maxDeepstream除了支持deepstream本身的一些peoplenet, trafficcamnet外，也支持自定义的级联网络逻辑推理，在完成以上代码更新以及编译后，即可进行以下  demo的复现，复现拉的是mp4本地视频，要拉rtsp,修改配置文件[source]字段type    
 - 1、中文车牌检测，支持绿色车牌识别  
-模型加载（部分模型经过nvidia TAO工具（https://docs.nvidia.com/tao/tao-toolkit/index.html）进行微调训练），模型包括三个，1级模型为nvidia的  trafficcamnet，二级模型为重训练的车牌检测模型，三级模型为重训练的车牌识别模型  
+模型加载，部分模型经过[nvidia TAO工具](https://docs.nvidia.com/tao/tao-toolkit/index.html）进行微调训练)，模型包括三个，1级模型为nvidia的  trafficcamnet，二级模型为重训练的车牌检测模型，三级模型为重训练的车牌识别模型
+- step 1、准备好模型以及测试视频:将192.169.2.126机器的/opt/project/engine/car_lrp中所有文件拷贝至本机/opt/project/engine/car_lrp，测试视频放在/opt/project/demo/car_lrp下。
 
 
 
