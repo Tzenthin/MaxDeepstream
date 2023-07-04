@@ -70,19 +70,19 @@ deepstream的升级版，简称**maxDeepstream**，在deepstream-6.1及以上版
   * **step2** 、准备好算法配置文件，将本资源$PATH/apps/sample_apps/deepstream-app/demo_config/dir下的配置文件拷贝到你的机器相应的位置目录下  
   * **step3** 、cd $PATH/apps/sample_apps/deepstream-app 执行./deepstream-app -c ./demo_config/dir/deepstream_app.txt  
 
-- 5、目标蹦跑（行人）
+- 5、目标蹦跑（行人）  
 模型加载，模型为nvidia的peoplenet  
   * **step1** 、准备好模型以及测试视频：模型仍采取上面2提到的peoplenet模型，测试视频放在/opt/project/demo/running下  
   * **step2** 、准备好算法配置文件，将本资源$PATH/apps/sample_apps/deepstream-app/demo_config/running下的配置文件拷贝到你的机器相应的位置目录下  
   * **step3** 、cd $PATH/apps/sample_apps/deepstream-app 执行./deepstream-app -c ./demo_config/running/deepstream_app.txt  
 
-- 6、口罩检测
+- 6、口罩检测  
 模型加载，模型为nvidia的peoplenet  
   * **step1** 、准备好模型以及测试视频：模型仍采取上面2提到的peoplenet模型，测试视频放在/opt/project/demo/mask下  
   * **step2** 、准备好算法配置文件，将本资源$PATH/apps/sample_apps/deepstream-app/demo_config/mask下的配置文件拷贝到你的机器相应的位置目录下  
   * **step3** 、cd $PATH/apps/sample_apps/deepstream-app 执行./deepstream-app -c ./demo_config/mask/deepstream_app.txt  
 
-- 7、厨师帽检测（明厨亮灶）
+- 7、厨师帽检测（明厨亮灶）  
 模型加载，模型为nvidia的detectnet_v2  
   * **step1** 、准备好模型以及测试视频：将公司192.169.2.126机器的/opt/project/engine/chefcap中所有模型文件拷贝至你的机器相同目录下，测试视频放在/opt/project/demo/chefcap下  
   * **step2** 、准备好算法配置文件，将本资源$PATH/apps/sample_apps/deepstream-app/demo_config/chefcap下的配置文件拷贝到你的机器相应的位置目录下  
