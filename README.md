@@ -166,3 +166,8 @@ deepstream的升级版，简称**maxDeepstream**，在deepstream-6.1及以上版
 - 4、不同的机器设备间，同一个tensorrt引擎engine文件有可能不兼容，最好在每个本机利用其内部的tensorRT环境重新转引擎  
 - 5、前期部署时，[sink]属性最好选择终端显示，要是所有画面不是同时加载，在排除不是算法框架的问题下，需要升级摄像头的驱动，联系相应设备官方，更新至最新即可  
 - 6、deepstream一般会很稳定的持续运行，但也遇到过流画面掉线恢复后，deepstream的fps仍然为0，这里只需要在分析fps异常时，删除缓存文件，重启下deepstream-app程序即可，即$PATH/apps/sample_apps/deepstream-app/deepstream_app_main.c 209行所执行的脚本命令
+
+# 后续优化方向
+- 1、 实际项目部署时，因对2-4mm毫米的摄像头的安装需求，需要对画面标定纠正，目前纠正采取的是ffmpeg+nginx对推的http流转成http流，并在gis中播放，但出现延迟4-5s的情况，后续可改成采取MaxDeepstream直接转RTSP流  
+- 2、 MaxDeepstream中目前对arcface网络输出后处理的anchor regress采取的是cpu，因拉取16+路数，可将这部分采取cuda c优化加速  
+- 3、 gst-dsexample在deepstream中，其pipeline处于在较后位置，导致无法使用tracker，是否可以在tracker pipeline前进行数据流转mat并进行tensorrt引擎推理，充分利用检测+跟踪进行算法分析  
