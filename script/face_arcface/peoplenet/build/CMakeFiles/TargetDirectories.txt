@@ -1,0 +1,3 @@
+/home/xuwang/projects/MaxDeepstream/script/face_arcface/peoplenet/build/CMakeFiles/rebuild_cache.dir
+/home/xuwang/projects/MaxDeepstream/script/face_arcface/peoplenet/build/CMakeFiles/edit_cache.dir
+/home/xuwang/projects/MaxDeepstream/script/face_arcface/peoplenet/build/CMakeFiles/peoplenet.dir
