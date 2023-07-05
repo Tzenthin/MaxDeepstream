@@ -1,6 +1,6 @@
 # 介绍
 deepstream的升级版，简称**maxDeepstream**，在deepstream-6.1及以上版本中，基于其sample_apps中deepstream-app源码，提出了几点修改:  
-- 1、在deepstream的gst-plugins基础上，修改并支持任何tensorRT的模型引擎的推理;  
+- 1、在deepstream的gst-plugins基础上，修改并支持任何cv方向tensorRT的模型引擎的推理;  
 - 2、将deepstream-nvdsanalytics-test的代码整理融合进deepstream-app中进行目标检测以及跟踪后的meta-data数据分析。
 - 3、添加了http通信协议，将预警数据以json数据包的形式通过http_post发送
 
