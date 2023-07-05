@@ -206,8 +206,8 @@ perf_cb (gpointer context, NvDsAppPerfStruct * str)
       g_print ("FPS %d (Avg)\t", i);
       if(fps[i] < 10)
       { 
-        system("echo \"xuwang\" | sudo -S nohup /opt/nvidia/deepstream/deepstream-6.1/sources/apps/sample_apps/deepstream-app/script/restart_deepstream.sh > \
-                                              /opt/nvidia/deepstream/deepstream-6.1/sources/apps/sample_apps/deepstream-app/script/log/deepstream_log.txt 2>&1 &");
+        system("echo \"xuwang\" | sudo -S nohup /opt/project/script/restart_deepstream.sh > \
+                                              /opt/project/log/deepstream_log.txt 2>&1 &");
       }
     }
   }
