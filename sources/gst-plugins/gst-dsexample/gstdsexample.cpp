@@ -835,10 +835,10 @@ gst_dsexample_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
   if(!engine_init)
   {
   //create engine
-  retinaface_trt_engine = retinaface_trt_create("/opt/project/camera_config/engine/retinaface_960_540_b15.engine", dsexample->batch_size);
+  retinaface_trt_engine = retinaface_trt_create("/opt/project/engine/arcface/retinaface_960_540_b15.engine", dsexample->batch_size);
   std::cout << "retinaface Created successfully......." << std::endl;
   cuda_preprocess_init();
-  arcface_trt_engine = arcface_trt_create("/opt/project/camera_config/engine/arcface_fuhang_r18_256_fp16.engine", "/opt/project/camera_config/wanci_v2.csv", face_csv, face_name);
+  arcface_trt_engine = arcface_trt_create("/opt/project/engine/arcface/arcface_b256_dynamic_fp16.engine", "/opt/project/config/face.csv", face_csv, face_name);
   std::cout << "Arcface-trt Created successfully......." << std::endl;
   arcface_cuda_preprocess_init();
   img_scale[0] = dsexample->video_info.width / (float)RETINAFACE_INPUT_W;
@@ -1083,12 +1083,12 @@ gst_dsexample_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
         }
         for(int i = 0; i < align_imgs.size(); i++)
         { 
-          std::string time_cur = get_date_time();
-          std::string save_name = "/opt/project/camera_config/wanci_propress/" + std::to_string(det[i].sourceID) + "/"  + std::to_string(dsexample->frame_num) + "_" \
-                                                                                          + std::to_string(i) + "_" + time_cur  + ".jpg";
-          cv::Mat tempMat = align_imgs[i].clone();
-          cv::cvtColor(tempMat, tempMat, cv::COLOR_RGB2BGR);
-          cv::imwrite(save_name, tempMat);
+          // std::string time_cur = get_date_time();
+          // std::string save_name = "/opt/project/camera_config/wanci_propress/" + std::to_string(det[i].sourceID) + "/"  + std::to_string(dsexample->frame_num) + "_" \
+          //                                                                                 + std::to_string(i) + "_" + time_cur  + ".jpg";
+          // cv::Mat tempMat = align_imgs[i].clone();
+          // cv::cvtColor(tempMat, tempMat, cv::COLOR_RGB2BGR);
+          // cv::imwrite(save_name, tempMat);
           arcface_cuda_preprocess(align_imgs[i].ptr(), i, (float*)trt_ctx->buffers[0], LANDMARK_ARCFACE_INPUT_W, LANDMARK_ARCFACE_INPUT_H, trt_ctx->cuda_stream);
         }
         arcface_trt_detect(arcface_trt_engine, align_imgs.size());
@@ -1156,17 +1156,17 @@ gst_dsexample_transform_ip (GstBaseTransform * btrans, GstBuffer * inbuf)
                   if(face_env[det_iter->classname][0] >= dsexample->env_interval)
                   {
                     std::string time_cur = get_date_time();
-                    if((access(("/opt/project/camera_config/face_warningImg/" + std::to_string(det_iter->sourceID) + "/" + det_iter->classname + "/").c_str(), 0)) != -1)
+                    if((access(("/opt/project/tmp/face_warningImg/" + std::to_string(det_iter->sourceID) + "/" + det_iter->classname + "/").c_str(), 0)) != -1)
                     {   
                       printf("Dir exists\n");
                     }
                     else
                     {                           
                       printf("not exist\n");
-                      std::string command = "mkdir -p /opt/project/camera_config/face_warningImg/" + std::to_string(det_iter->sourceID) + "/" + det_iter->classname + "/";
+                      std::string command = "mkdir -p /opt/project/tmp/face_warningImg/" + std::to_string(det_iter->sourceID) + "/" + det_iter->classname + "/";
                       system(command.c_str());           
                     }
-                    std::string faceimg_name = "/opt/project/camera_config/face_warningImg/" + std::to_string(det_iter->sourceID) + "/"  + det_iter->classname + "/" \
+                    std::string faceimg_name = "/opt/project/tmp/face_warningImg/" + std::to_string(det_iter->sourceID) + "/"  + det_iter->classname + "/" \
                                                                                              + time_cur + "_" + det_iter->classname + ".jpg";
                     cv::Rect rect = cv::Rect(int(det_iter->x1), int(det_iter->y1), int(det_iter->x2 - det_iter->x1), int(det_iter->y2 - det_iter->y1));
                     rect.x -= rect.width * 0.5;
